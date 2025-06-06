@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import ThemedCard from '../components/ThemedCard';
 import { useTaskStore } from '../stores/useTaskStore';
@@ -14,6 +15,8 @@ const Home = () => {
 	const tasks = useTaskStore((state) => state.tasks);
 	const updateTask = useTaskStore((state) => state.updateTask);
 	const deleteTask = useTaskStore((state) => state.deleteTask);
+
+	const router = useRouter();
 
 	const handleUpdateTaskStatus = (task: Task) => {
 		task.status = !task.status;
@@ -35,7 +38,6 @@ const Home = () => {
 					text: 'Delete',
 					style: 'destructive',
 					onPress: () => {
-						// Perform delete logic here
 						deleteTask(key);
 						console.log('Task Deleted!');
 					},
@@ -57,17 +59,27 @@ const Home = () => {
 						<ThemedCard
 							updatePress={() => handleUpdateTaskStatus(item)}
 							deletePress={() => handleDeleteTask(item.key)}
+							viewupdatePress={() =>
+								router.push({
+									pathname: '/viewupdatetask',
+									params: {
+										taskKey: item.key,
+										taskTitle: item.title,
+										taskDescription: item.description,
+										taskStatus: item.status.toString(),
+									},
+								})
+							}
 							title={item.title}
 							iconName={item.status ? 'checkbox' : 'square-outline'}
 							titleStyle={
 								item.status ? { textDecorationLine: 'line-through' } : undefined
 							}
 							styleCard={{
-								width: 300,
+								width: '95%',
 								flex: 1,
 								flexDirection: 'row',
 								alignItems: 'center',
-								justifyContent: 'space-between',
 							}}
 						/>
 					)}

@@ -6,7 +6,7 @@ interface ThemedButtonProps {
 	title: string;
 	onPress: () => void;
 	disabled?: boolean;
-	icon: boolean;
+	icon?: boolean;
 	iconName?: keyof typeof Ionicons.glyphMap;
 	iconSize?: number;
 	buttonStyle?: object;
@@ -55,12 +55,11 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		backgroundColor: '#1f2937',
-		marginHorizontal: 14,
-		paddingVertical: 14,
+		marginVertical: 5,
+		paddingVertical: 10,
 		paddingHorizontal: 14,
 		borderRadius: 10,
 		alignItems: 'center',
-		marginVertical: 10,
 	},
 	text: {
 		color: '#fff',

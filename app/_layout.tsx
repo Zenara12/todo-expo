@@ -18,9 +18,7 @@ const RootLayout = () => {
 								onPress={() => {
 									router.push('/createtask');
 								}}
-								title={' '}
-								icon={true}
-								iconName={'add'}
+								title={'+'}
 							/>
 						),
 					}}
@@ -29,6 +27,13 @@ const RootLayout = () => {
 					name='createtask'
 					options={{
 						title: 'Add Task',
+						presentation: 'modal',
+					}}
+				/>
+				<Stack.Screen
+					name='viewupdatetask'
+					options={{
+						title: 'View & Update Task',
 						presentation: 'modal',
 					}}
 				/>

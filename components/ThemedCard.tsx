@@ -21,6 +21,7 @@ interface ThemedCardProps {
 	iconName: keyof typeof Ionicons.glyphMap;
 	updatePress: () => void;
 	deletePress: () => void;
+	viewupdatePress: () => void;
 }
 
 const ThemedCard: React.FC<ThemedCardProps> = ({
@@ -33,6 +34,7 @@ const ThemedCard: React.FC<ThemedCardProps> = ({
 	iconName,
 	updatePress,
 	deletePress,
+	viewupdatePress,
 }) => {
 	return (
 		<View style={[styles.card, styleCard]}>
@@ -42,6 +44,7 @@ const ThemedCard: React.FC<ThemedCardProps> = ({
 				title={' '}
 				icon={true}
 				iconName={iconName}
+				buttonStyle={{ marginHorizontal: 10 }}
 			/>
 			<Text style={[styles.title, titleStyle]}>{title}</Text>
 			{description && (
@@ -50,11 +53,20 @@ const ThemedCard: React.FC<ThemedCardProps> = ({
 				</Text>
 			)}
 			<ThemedButton
+				onPress={viewupdatePress}
+				title={' '}
+				icon={true}
+				iconName={'eye'}
+				iconStyle={{ color: '#ff6600' }}
+				buttonStyle={{ marginLeft: 25 }}
+			/>
+			<ThemedButton
 				onPress={deletePress}
 				title={' '}
 				icon={true}
 				iconName={'trash-bin-outline'}
 				iconStyle={{ color: '#e60008' }}
+				buttonStyle={{ marginHorizontal: 10 }}
 			/>
 		</View>
 	);
@@ -64,8 +76,9 @@ const styles = StyleSheet.create({
 	card: {
 		backgroundColor: '#1f2937',
 		borderRadius: 12,
-		padding: 16,
+		padding: 5,
 		marginVertical: 10,
+		marginHorizontal: 5,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 3 },
 		shadowOpacity: 0.3,
